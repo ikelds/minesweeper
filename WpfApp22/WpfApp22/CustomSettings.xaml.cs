@@ -35,36 +35,33 @@ namespace WpfApp22
             int numberOfMines;
 
             Random r = new Random();
-
             multiplier = r.Next(6, 11);
-
-            //MessageBox.Show(multiplier.ToString());
             numberOfMines = xamlCustomHeight * xamlCustomWight / multiplier;
 
             xamlMines = numberOfMines;
         }
-            
-
-            
-
-
-
-
 
         private void Button_Cust_OK(object sender, RoutedEventArgs e)
         {
-
-            if (modeMines == "Auto_visible")
-                GenerateQuantityMines();
-
-
             MainWindow.heightSize = xamlCustomHeight;
             MainWindow.widthSize = xamlCustomWight;
-            MainWindow.mines = xamlMines;
+            
 
             var myMainWindow = this.Owner as MainWindow;
-            myMainWindow.NewGame();
- 
+
+            if (modeMines == "Auto_visible")
+            {
+                GenerateQuantityMines();
+                myMainWindow.cntLabel.Visibility = Visibility.Visible;
+            }                
+            else if (modeMines == "Auto_hide")
+            {
+                GenerateQuantityMines();
+                myMainWindow.cntLabel.Visibility = Visibility.Hidden;
+            }
+
+            MainWindow.mines = xamlMines;
+            myMainWindow.NewGame(); 
             this.Close();
         }
 

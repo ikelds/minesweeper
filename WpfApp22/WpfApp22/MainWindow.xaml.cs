@@ -39,6 +39,8 @@ namespace WpfApp22
         {
             InitializeComponent();
             this.DataContext = mns;
+
+            //cntLabel.IsVisible(false);
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
