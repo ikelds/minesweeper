@@ -23,7 +23,7 @@ namespace WpfApp22
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]String prop ="")
+        public void OnPropertyChanged([CallerMemberName]String prop = "")
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));

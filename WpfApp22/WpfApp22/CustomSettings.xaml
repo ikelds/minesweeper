@@ -6,6 +6,26 @@
         xmlns:local="clr-namespace:WpfApp22"
         mc:Ignorable="d"
         Title="Сапер" Height="320" Width="200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+
+    <!--<Window.Resources>
+        <Style TargetType="TextBox"  >
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=Auto_visible, Path=IsChecked}"
+                        Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=Auto_hide, Path=IsChecked}"
+                        Value="True">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding ElementName=Adjusted, Path=IsChecked}"
+                        Value="True">
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>-->
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -31,7 +51,9 @@
         <TextBox Grid.Column="1" Grid.Row="1" Margin="5" Width="40" Text="15" TextChanged="width_TextChanged"/>
         <Label Grid.Column="0" Grid.Row="2"
             Content="Высота:" DockPanel.Dock="Left"/>
-        <TextBox Grid.Column="1" Grid.Row="2" Margin="5" Width="40" Text="15" TextChanged="height_TextChanged"/>
+        <TextBox Grid.Column="1" Grid.Row="2" 
+                 Margin="5" Width="40" Text="15" 
+                 TextChanged="height_TextChanged"/>
         
         <Label Grid.Column="0" Grid.Row="3"
             Content="Кол-во мин:" />
@@ -49,7 +71,15 @@
                      GroupName="Complexity" Content="Заданное" 
                      Margin="10, 2, 2, 2"
                      Name="Adjusted" Checked="Radio_btn_Checked"/>
-        <TextBox Grid.Column="0" Grid.Row="7" Margin="5" Width="40" TextChanged="mines_TextChanged"/>
+        <TextBox x:Name="txtBoxMines" Grid.Column="0" Grid.Row="7" 
+                 Margin="5" Width="40" TextChanged="mines_TextChanged"
+                 Text="{Binding Path=Text, Mode=TwoWay, 
+                    UpdateSourceTrigger=PropertyChanged}"
+                 IsEnabled="{Binding TextBoxEnabled}"/>
+
+        <!--<TextBox x:Name="txtBoxMines" Grid.Column="0" Grid.Row="7" 
+                 Margin="5" Width="40" TextChanged="mines_TextChanged" 
+                 IsEnabled="{Binding ElementName=Adjusted, Path=IsChecked}"/>-->
 
         <Button Grid.Column="0" Grid.Row="9" Content="ОК" Width="70" Height="20" Click="Button_Cust_OK"/>
         <Button Grid.Column="1" Grid.Row="9" Content="Cancel" Width="70" Height="20" Click="Button_Cust_Cancel"/>

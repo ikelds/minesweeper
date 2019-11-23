@@ -12,21 +12,30 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
+using System.ComponentModel;
+
+using System.Runtime.CompilerServices;
+
+
 namespace WpfApp22
 {
     /// <summary>
     /// Interaction logic for CustomSettings.xaml
     /// </summary>
-    public partial class CustomSettings : Window
+    public partial class CustomSettings : Window, INotifyPropertyChanged
     {
         int xamlCustomHeight;
         int xamlCustomWight;
         int xamlMines;
         String modeMines;
 
+  
+
         public CustomSettings()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
 
         private void GenerateQuantityMines()
@@ -45,7 +54,6 @@ namespace WpfApp22
         {
             MainWindow.heightSize = xamlCustomHeight;
             MainWindow.widthSize = xamlCustomWight;
-            
 
             var myMainWindow = this.Owner as MainWindow;
 
@@ -53,11 +61,17 @@ namespace WpfApp22
             {
                 GenerateQuantityMines();
                 myMainWindow.cntLabel.Visibility = Visibility.Visible;
+                
             }                
             else if (modeMines == "Auto_hide")
             {
                 GenerateQuantityMines();
                 myMainWindow.cntLabel.Visibility = Visibility.Hidden;
+            }
+            else if(modeMines == "Adjusted")
+            {
+                MainWindow.mines = xamlMines;
+                myMainWindow.cntLabel.Visibility = Visibility.Visible;
             }
 
             MainWindow.mines = xamlMines;
@@ -91,11 +105,66 @@ namespace WpfApp22
         private void Radio_btn_Checked(object sender, RoutedEventArgs e)
         {
             if (Auto_visible.IsChecked == true)
+            {
                 modeMines = "Auto_visible";
+
+                TextBoxEnabled = false;
+                //txtBoxMines.Text = "wwww";
+
+                TextBoxEnabled = false;
+        
+
+
+            }
             else if (Auto_hide.IsChecked == true)
+            {
                 modeMines = "Auto_hide";
+                TextBoxEnabled = false;
+                //stateTxtBox = false;
+                //txtBoxMines.IsEnabled = false;
+            }
             else if (Adjusted.IsChecked == true)
+            {
                 modeMines = "Adjusted";
+                TextBoxEnabled = true;
+                //stateTxtBox = true;
+                //txtBoxMines.IsEnabled = true;
+            }
+                
         }
+
+        private Boolean _textbox_enabled;
+        //public event PropertyChangedEventHandler PropertyChanged;
+        public Boolean TextBoxEnabled
+        {
+            get { return _textbox_enabled; }
+            set
+            {
+                _textbox_enabled = value;
+                OnPropertyChanged("TextBoxEnabled");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]String prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        //protected void OnPropertyChanged(string name)
+        //{
+        //    PropertyChangedEventHandler handler = PropertyChanged;
+        //    if (handler != null)
+        //    {
+        //        handler(this, new PropertyChangedEventArgs(name));
+        //    }
+        //}
+
+        //public void OnPropertyChanged([CallerMemberName]String prop = "")
+        //{
+        //    if (PropertyChanged != null)
+        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        //}
     }
 }

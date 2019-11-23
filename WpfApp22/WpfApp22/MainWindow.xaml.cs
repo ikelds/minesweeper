@@ -34,12 +34,15 @@ namespace WpfApp22
 
         Mines mns = new Mines();
 
+ 
 
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = mns;
 
+
+      
             //cntLabel.IsVisible(false);
         }
 
@@ -530,7 +533,11 @@ namespace WpfApp22
         {
             CustomSettings customSett = new CustomSettings();
             customSett.Owner = this;
+
+            //customSett.txtBoxMines.IsEnabled = false;
             customSett.ShowDialog();
+
+
         }
         
         private void Button_StartGame(object sender, RoutedEventArgs e)
