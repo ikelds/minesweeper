@@ -29,12 +29,19 @@
             Content="Специальные настройки:" HorizontalAlignment="Center" FontWeight="Bold"/>
         <Label Grid.Column="0" Grid.Row="1"
             Content="Ширина:" />
-        <TextBox Grid.Column="1" Grid.Row="1" Margin="5" Width="40" Text="15" TextChanged="width_TextChanged"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Margin="5" 
+                 Width="40" Text="15" TextChanged="width_TextChanged"
+                 PreviewTextInput="TextBox_PreviewTextInput"
+                 PreviewKeyDown="TextBox_PreviewKeyDown"
+                 MaxLength="4"/>
         <Label Grid.Column="0" Grid.Row="2"
             Content="Высота:" DockPanel.Dock="Left"/>
         <TextBox Grid.Column="1" Grid.Row="2" 
                  Margin="5" Width="40" Text="15" 
-                 TextChanged="height_TextChanged"/>
+                 TextChanged="height_TextChanged"
+                 PreviewTextInput="TextBox_PreviewTextInput"
+                 PreviewKeyDown="TextBox_PreviewKeyDown"
+                 MaxLength="4"/>
         
         <Label Grid.Column="0" Grid.Row="3"
             Content="Кол-во мин:" />
@@ -55,7 +62,10 @@
                  Margin="5" Width="40" TextChanged="mines_TextChanged"
                  Text="{Binding Path=Text, Mode=TwoWay, 
                     UpdateSourceTrigger=PropertyChanged}"
-                 IsEnabled="{Binding TextBoxEnabled}"/>
+                 IsEnabled="{Binding TextBoxEnabled}"
+                 PreviewTextInput="TextBox_PreviewTextInput"
+                 PreviewKeyDown="TextBox_PreviewKeyDown"
+                 MaxLength="9"/>
 
         <!--Option to use binding in XAML-->
         <!--<TextBox x:Name="txtBoxMines" Grid.Column="0" Grid.Row="7" 
@@ -65,4 +75,5 @@
         <Button Grid.Column="0" Grid.Row="9" Content="ОК" Width="70" Height="20" Click="Button_Cust_OK"/>
         <Button Grid.Column="1" Grid.Row="9" Content="Cancel" Width="70" Height="20" Click="Button_Cust_Cancel"/>
     </Grid>
+    
 </Window>

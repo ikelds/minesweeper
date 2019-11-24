@@ -12,8 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
-
-
+using System.Text.RegularExpressions;
 
 namespace WpfApp22
 {
@@ -24,6 +23,7 @@ namespace WpfApp22
         int xamlCustomWight;
         int xamlMines;
         String modeMines;
+        Regex regex = new Regex("^[0-9]+$");
 
         public CustomSettings()
         {
@@ -79,20 +79,87 @@ namespace WpfApp22
 
         private void width_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var item = sender as TextBox;
-            xamlCustomWight = int.Parse(item.Text);
+            var textBoxXaml = sender as TextBox;
+
+            if (regex.IsMatch(textBoxXaml.Text))
+            {
+                int valueTxtBox = int.Parse(textBoxXaml.Text);
+
+                if (valueTxtBox > 100)
+                {
+                    if (MessageBox.Show("Введеное значение слишком велико. " +
+                        "Создание большого игрового поля может занять " +
+                        "значительное время. Вы уверены, что хотите продолжить?", 
+                        "Предупреждение", MessageBoxButton.YesNo, 
+                        MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        xamlCustomWight = valueTxtBox;
+                    }
+                    else
+                    {
+                        textBoxXaml.Text = xamlCustomWight.ToString();
+                    }
+                }
+                else
+                {
+                    xamlCustomWight = valueTxtBox;
+                }
+            }
         }
 
         private void height_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var item = sender as TextBox;
-            xamlCustomHeight = int.Parse(item.Text);
+            var textBoxXaml = sender as TextBox;
+
+            if (regex.IsMatch(textBoxXaml.Text))
+            {
+                int valueTxtBox = int.Parse(textBoxXaml.Text);
+
+                if (valueTxtBox > 100)
+                {
+                    if (MessageBox.Show("Введеное значение слишком велико. " +
+                        "Создание большого игрового поля может занять " +
+                        "значительное время. Вы уверены, что хотите продолжить?",
+                        "Предупреждение", MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning) == MessageBoxResult.Yes)
+                    {
+                        xamlCustomHeight = valueTxtBox;
+                    }
+                    else
+                    {
+                        textBoxXaml.Text = xamlCustomWight.ToString();
+                    }
+                }
+                else
+                {
+                    xamlCustomHeight = valueTxtBox;
+                }
+            }
         }
 
         private void mines_TextChanged(object sender, TextChangedEventArgs e)
         {
-            var item = sender as TextBox;
-            xamlMines = int.Parse(item.Text);
+            var textBoxXaml = sender as TextBox;
+
+            if (regex.IsMatch(textBoxXaml.Text))
+            {
+                int valueTxtBox = int.Parse(textBoxXaml.Text);
+
+                if (valueTxtBox >= xamlCustomHeight * xamlCustomWight)
+                {
+                    MessageBox.Show("Количество мин больше либо равно, общего числа клеток на поле. " +
+                        "Уменьшите количество мин.", "Предупреждение");
+                    textBoxXaml.Text = xamlMines.ToString();
+                }
+                else
+                {
+                    xamlMines = valueTxtBox;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Неверное значение количества мин.", "Ошибка");
+            }
         }
 
         private void Radio_btn_Checked(object sender, RoutedEventArgs e)
@@ -135,6 +202,20 @@ namespace WpfApp22
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space)
+            {
+                e.Handled = true;
             }
         }
     }

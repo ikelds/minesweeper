@@ -6,17 +6,21 @@
         xmlns:local="clr-namespace:WpfApp22"
         mc:Ignorable="d"
         Title="Игра сапер" Height="870" Width="1220"
-        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen">
+    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                  HorizontalScrollBarVisibility="Auto">
+    
     <DockPanel LastChildFill="True">
         <StackPanel DockPanel.Dock="Right">
-            <Button Height="40" Width="200" Content="Easy 9x9" Click="Button_Easy" Margin="10" Background="ForestGreen" />
-            <Button Height="40" Width="200" Content="Medium 16x16" Click="Button_Medium" Margin="10" Background="DarkOrange"/>
-            <Button Height="40" Width="200" Content="Expert 30x16" Click="Button_Expert" Margin="10" Background="IndianRed"/>
-            <Button Height="40" Width="200" Content="Custom" Click="Button_Custom" Margin="10" Background="MediumPurple"/>
+                <Button Height="40" Width="200" Content="Easy 9x9" Click="Button_Easy" Margin="10" Background="ForestGreen" FontWeight="DemiBold" FontSize="20"/>
+                <Button Height="40" Width="200" Content="Medium 16x16" Click="Button_Medium" Margin="10" Background="DarkOrange" FontWeight="DemiBold" FontSize="20"/>
+                <Button Height="40" Width="200" Content="Expert 30x16" Click="Button_Expert" Margin="10" Background="IndianRed" FontWeight="DemiBold" FontSize="20"/>
+            <Button Height="40" Width="200" Content="Custom" Click="Button_Custom" Margin="10" Background="MediumPurple" FontWeight="DemiBold" FontSize="20"/>
         </StackPanel>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-            <Label x:Name="cntLabel" Content="{Binding MinesProp, Mode=TwoWay}" HorizontalAlignment="Center" FontSize="25"/>
+            <Label x:Name="cntLabel" Content="{Binding MinesProp, Mode=TwoWay}" HorizontalAlignment="Center" FontSize="25" FontWeight="DemiBold"/>
             <Grid x:Name="gridField"/>
         </StackPanel>
     </DockPanel>
+    </ScrollViewer>
 </Window>

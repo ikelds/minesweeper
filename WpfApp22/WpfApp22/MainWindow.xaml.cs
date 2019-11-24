@@ -15,10 +15,6 @@ using System.Windows.Shapes;
 
 namespace WpfApp22
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    
     public partial class MainWindow : Window
     {
         public static int heightSize;
@@ -34,21 +30,10 @@ namespace WpfApp22
 
         Mines mns = new Mines();
 
- 
-
         public MainWindow()
         {
             InitializeComponent();
             this.DataContext = mns;
-
-
-      
-            //cntLabel.IsVisible(false);
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            
         }
 
         public void NewGame()
@@ -69,7 +54,6 @@ namespace WpfApp22
                 ib = new ImageBrush();
                 BitmapImage bmi = new BitmapImage(new Uri(@"pack://application:,,,/Images/flag.jpg"));
                 ib.ImageSource = bmi;
-
 
                 for (int i = 0; i < heightSize; i++)
                 {
@@ -108,8 +92,6 @@ namespace WpfApp22
             {
                 MessageBox.Show("Исправьте параметры");
             }
-
-            //Binding bindingLabel1 = BindingOperations.GetBinding(myLabel1, 10);
         }
 
         private void RefreshAllRects()
@@ -167,7 +149,7 @@ namespace WpfApp22
             GameCompletionCheck();
         }
 
-        private void ShowSumMinesAroundEmptyrect()
+        private void ShowSumMinesAroundEmptyRect()
         {
             int i_offset;
             int j_offset;
@@ -277,14 +259,13 @@ namespace WpfApp22
                 j_offset = j + 1;
                 if ((i_offset < heightSize) && (j_offset < widthSize) && (arrCntMines[i_offset, j_offset] == 0) && (arrCurrentStateGame[i_offset, j_offset] == 1111))
                     IfEmptyRectProcessOtherRect(i_offset, j_offset);
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
 
-            ShowSumMinesAroundEmptyrect();
+            ShowSumMinesAroundEmptyRect();
             RefreshAllRects();
         }
 
@@ -294,7 +275,6 @@ namespace WpfApp22
 
             int rect_i = Grid.GetRow(currrect);
             int rect_j = Grid.GetColumn(currrect);
-
 
             SettingFlag(rect_i, rect_j, currrect);
         }
@@ -330,8 +310,6 @@ namespace WpfApp22
                     }
                     else
                     {
-
-
                         arrCurrentStateGame[rect_i, rect_j] = totalMines;
                     }
                 }
@@ -342,12 +320,11 @@ namespace WpfApp22
             RefreshAllRects();
         }
 
-
         private bool SetMines(int heightSize, int widthSize, int numberMines)
         {
             if (numberMines >= heightSize * widthSize)
             {
-                MessageBox.Show("Кол-во мин больше или равно, чем клеток на поле. Уменьшите количество мин.", "Предупреждение");
+                MessageBox.Show("Количество мин больше или равно, общего числа клеток на поле. Уменьшите количество мин.", "Предупреждение");
 
                 return false;
             }
@@ -374,8 +351,6 @@ namespace WpfApp22
 
                 return true;
             }
-
-           
         }
 
         private void CountMineAround()
@@ -475,31 +450,6 @@ namespace WpfApp22
 
             if (check)
                 MessageBox.Show("Поздравляем! Вы выиграли");
-
-        }
-
-
-        private void WidthXaml_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-            var textBox = sender as TextBox;
-            String s = textBox.Text;
-            widthSize = int.Parse(s);
-        }
-
-        private void HeightXaml_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-            var textBox = sender as TextBox;
-            String s = textBox.Text;
-            heightSize = int.Parse(s);
-        }
-
-        private void QuantityMinesXaml_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            String s = textBox.Text;
-            mines = int.Parse(s);
         }
 
         private void Button_Easy(object sender, RoutedEventArgs e)
@@ -533,16 +483,8 @@ namespace WpfApp22
         {
             CustomSettings customSett = new CustomSettings();
             customSett.Owner = this;
-
-            //customSett.txtBoxMines.IsEnabled = false;
+            
             customSett.ShowDialog();
-
-
-        }
-        
-        private void Button_StartGame(object sender, RoutedEventArgs e)
-        {
-            NewGame();
         }
     }
 }
