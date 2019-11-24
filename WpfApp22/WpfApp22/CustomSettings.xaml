@@ -6,25 +6,6 @@
         xmlns:local="clr-namespace:WpfApp22"
         mc:Ignorable="d"
         Title="Сапер" Height="320" Width="200" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
-
-    <!--<Window.Resources>
-        <Style TargetType="TextBox"  >
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding ElementName=Auto_visible, Path=IsChecked}"
-                        Value="True">
-                    <Setter Property="IsEnabled" Value="False"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=Auto_hide, Path=IsChecked}"
-                        Value="True">
-                    <Setter Property="IsEnabled" Value="False"/>
-                </DataTrigger>
-                <DataTrigger Binding="{Binding ElementName=Adjusted, Path=IsChecked}"
-                        Value="True">
-                    <Setter Property="IsEnabled" Value="True"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>-->
     
     <Grid>
         <Grid.ColumnDefinitions>
@@ -57,7 +38,6 @@
         
         <Label Grid.Column="0" Grid.Row="3"
             Content="Кол-во мин:" />
-        
 
         <RadioButton Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" 
                      GroupName="Complexity" Content="Авто (видимое)" 
@@ -77,13 +57,12 @@
                     UpdateSourceTrigger=PropertyChanged}"
                  IsEnabled="{Binding TextBoxEnabled}"/>
 
+        <!--Option to use binding in XAML-->
         <!--<TextBox x:Name="txtBoxMines" Grid.Column="0" Grid.Row="7" 
                  Margin="5" Width="40" TextChanged="mines_TextChanged" 
                  IsEnabled="{Binding ElementName=Adjusted, Path=IsChecked}"/>-->
 
         <Button Grid.Column="0" Grid.Row="9" Content="ОК" Width="70" Height="20" Click="Button_Cust_OK"/>
         <Button Grid.Column="1" Grid.Row="9" Content="Cancel" Width="70" Height="20" Click="Button_Cust_Cancel"/>
-
-
     </Grid>
 </Window>

@@ -11,26 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
-
 using System.ComponentModel;
 
-using System.Runtime.CompilerServices;
 
 
 namespace WpfApp22
 {
-    /// <summary>
-    /// Interaction logic for CustomSettings.xaml
-    /// </summary>
+
     public partial class CustomSettings : Window, INotifyPropertyChanged
     {
         int xamlCustomHeight;
         int xamlCustomWight;
         int xamlMines;
         String modeMines;
-
-  
 
         public CustomSettings()
         {
@@ -107,34 +100,23 @@ namespace WpfApp22
             if (Auto_visible.IsChecked == true)
             {
                 modeMines = "Auto_visible";
-
                 TextBoxEnabled = false;
-                //txtBoxMines.Text = "wwww";
-
                 TextBoxEnabled = false;
-        
-
-
             }
             else if (Auto_hide.IsChecked == true)
             {
                 modeMines = "Auto_hide";
                 TextBoxEnabled = false;
-                //stateTxtBox = false;
-                //txtBoxMines.IsEnabled = false;
             }
             else if (Adjusted.IsChecked == true)
             {
                 modeMines = "Adjusted";
                 TextBoxEnabled = true;
-                //stateTxtBox = true;
-                //txtBoxMines.IsEnabled = true;
             }
-                
         }
 
         private Boolean _textbox_enabled;
-        //public event PropertyChangedEventHandler PropertyChanged;
+        
         public Boolean TextBoxEnabled
         {
             get { return _textbox_enabled; }
@@ -146,25 +128,14 @@ namespace WpfApp22
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]String prop = "")
+
+        protected void OnPropertyChanged(string name)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
         }
-
-        //protected void OnPropertyChanged(string name)
-        //{
-        //    PropertyChangedEventHandler handler = PropertyChanged;
-        //    if (handler != null)
-        //    {
-        //        handler(this, new PropertyChangedEventArgs(name));
-        //    }
-        //}
-
-        //public void OnPropertyChanged([CallerMemberName]String prop = "")
-        //{
-        //    if (PropertyChanged != null)
-        //        PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        //}
     }
 }
